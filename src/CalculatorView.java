@@ -12,22 +12,57 @@ public class CalculatorView extends JFrame {
     JButton divideButton = new JButton("/");
 
     public CalculatorView() {
-        JPanel calcPanel = new JPanel();
+        // Set layout and background color
+        JPanel calcPanel = new JPanel(new GridBagLayout());
+        calcPanel.setBackground(new Color(240, 240, 240));
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 200);
+        this.setTitle("Калькулятор");
+        this.setSize(400, 200);
 
-        calcPanel.add(new JLabel("Число 1:"));
-        calcPanel.add(firstNumber);
-        calcPanel.add(new JLabel("Число 2:"));
-        calcPanel.add(secondNumber);
-        calcPanel.add(addButton);
-        calcPanel.add(subtractButton);
-        calcPanel.add(multiplyButton);
-        calcPanel.add(divideButton);
-        calcPanel.add(new JLabel("Результат:"));
-        calcPanel.add(result);
-
+        // Configure text fields and result area
         result.setEditable(false);
+        result.setBackground(new Color(230, 230, 230));
+
+        // Add first number label and text field
+        c.insets = new Insets(5, 5, 5, 5);
+        c.gridx = 0;
+        c.gridy = 0;
+        calcPanel.add(new JLabel("Число 1:"), c);
+
+        c.gridx = 1;
+        calcPanel.add(firstNumber, c);
+
+        // Add second number label and text field
+        c.gridx = 0;
+        c.gridy = 1;
+        calcPanel.add(new JLabel("Число 2:"), c);
+
+        c.gridx = 1;
+        calcPanel.add(secondNumber, c);
+
+        // Add buttons
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.setBackground(new Color(240, 240, 240));
+        buttonPanel.add(addButton);
+        buttonPanel.add(subtractButton);
+        buttonPanel.add(multiplyButton);
+        buttonPanel.add(divideButton);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 2;
+        calcPanel.add(buttonPanel, c);
+
+        // Add result label and text field
+        c.gridx = 0;
+        c.gridy = 3;
+        calcPanel.add(new JLabel("Результат:"), c);
+
+        c.gridx = 1;
+        calcPanel.add(result, c);
 
         this.add(calcPanel);
     }
